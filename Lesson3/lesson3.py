@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 #Create seed
@@ -51,7 +52,7 @@ print(df.dtypes)
 df['State']=df.State.apply(lambda x: x.upper())
 # print(df['State'].unique())
 
-#2.Only grap where Status equals to 1
+#2.Only grab where Status equals to 1
 mask = df['Status']==1
 df = df[mask]
 
@@ -61,3 +62,23 @@ mask = df.State == 'TS'
 df['State'][mask] = 'AP'
 print(df.State.unique())
 
+sorted_df = df[df['State']== 'AP'].sort_index(axis=0)
+print(sorted_df.head(30))
+
+#As we are expecting multiple values on the same date and State,
+#We can acutally group thsese records, For this we need to reset the
+#index as the groupby function expects only columns as input. 
+#This reset_index function will index StatusDate back to column in 
+#the DataFrame(befause we indexed it as row in the above)
+Daily = df.reset_index().groupby(['State','StatusDate']).sum()
+print(Daily.head())
+
+#We can ignore the status column as all the values in this columns 
+#are of value 1
+del Daily['Status']
+print(Daily.head())
+
+#Now we can plot our customer count state wise
+#Here loc will applies on the indexers
+Daily.loc['AP'].plot()
+plt.show()
