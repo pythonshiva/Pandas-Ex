@@ -80,5 +80,7 @@ print(Daily.head())
 
 #Now we can plot our customer count state wise
 #Here loc will applies on the indexers
+#Pandas DataFrame.loc attribute access a group of rows and columns by label(s)
+#  or a boolean array in the given DataFrame.
 Daily.loc['AP'].plot()
 plt.show()
