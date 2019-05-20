@@ -16,7 +16,7 @@ df['Five']=5
 #If we want to duplicate a column
 df['dFive']=df['Five']
 
-#We can change the index values to whatever we want
+#We can change the index values
 index_vals = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 df.index = index_vals
 print(df.loc['i'])
@@ -32,7 +32,7 @@ print(df.iloc[0:3]) #Here we will get only 3 values(a,b,c and d is not included)
 print(df['Numbers'])
 print(df[['Numbers', 'Five']])
 
-#Fetch the data Numbers in an index range
+#Fetch the Numbers column from the data in an index range
 print(df.loc[df.index[0:3], 'Numbers'])
 print(df.loc[df.index[5:], ['Numbers', 'Five']])
 
